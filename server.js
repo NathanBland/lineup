@@ -4,7 +4,6 @@ var express = require('express'),
   routes = require('./routes/'), 
   session = require('express-session'),
   MongoStore = require('connect-mongo')(session),
-  bodyParser = require('body-parser'),
   sass = require('node-sass-middleware'),
   cookieParser = require('cookie-parser'),
   app = express()
@@ -39,6 +38,20 @@ app.use(bodyParser.urlencoded({
   extended: false
 }))
 app.locals.siteName = 'Watch List'
+
+var sessionStore = new MongoStore({
+  mongooseConnection: mongoose.connection
+})
+
+app.use(cookieParser('config.cookieSecret watch list')) // these values are temporary and will be chnaged
+app.use(session({
+  secret: 'config.sessionSecret watch list', // these values are temporary and will be chnaged
+  key: 'config.sessionSecretwatch list jet set key', // these values are temporary and will be chnaged
+  store: sessionStore,
+  resave: true,
+  saveUninitialized: true
+}))
+
 app.use('/', routes)
 
 app.listen(app.get('port'), app.get('ip'), function () {
