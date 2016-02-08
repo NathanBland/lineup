@@ -1,0 +1,114 @@
+$primary-color: #9B4DCA
+
+section
+  margin-top: 1em
+header 
+  margin-top: 1em
+.container
+  padding: 2rem
+  &.nav
+    padding-top: 0rem
+    padding-bottom: 0rem
+    
+.color--prime
+  color: $primary-color
+
+.navigation
+  background-color: #F1F1F1
+  box-shadow: 0px 1px 5px grey
+  h1.title 
+    margin-bottom: 0
+    .fa-ticket
+      font-size: 50%
+      vertical-align: middle
+
+.navigation .container
+  display: flex
+  
+.navigation-list
+  list-style: none
+  display: flex
+  align-items: center
+  margin-bottom: 0
+  flex: 1 1 auto
+  justify-content: flex-end
+
+.navigation-item
+  margin: .5em
+  
+.banner
+  height: 25vh
+  display: flex
+  flex-flow: column nowrap
+  align-items: center
+  align-content: center
+  justify-content: center
+  margin-top: 1em
+  
+  .fa-ticket
+    font-size: 250%
+#search fieldset
+  position: relative
+
+#search.search
+  margin-left: 1em
+
+.search__results
+  position: absolute
+  width: 100%
+  background-color: white
+  top: 7rem
+  display: flex
+  flex-flow: column nowrap
+  overflow-y: auto
+  box-shadow: 0px 1px 10px grey
+
+.search__result
+  display: flex
+  align-items: flex-start
+  &:hover
+    box-shadow: 0px 1px 10px grey
+    transition: all 500ms
+    background-color: #9B4DCA
+    cursor: select
+    color: white
+    .search__result--details .search__result--button
+      background-color: white
+      color: $primary-color
+
+.search__result--figure
+  margin: 1em
+  max-height: 100%
+  max-width: 5em
+
+.search__result--details
+  display: flex
+  flex: 1
+  flex-flow: column nowrap
+  position: relative
+  
+.search__result--text
+  flex: 1
+  margin-top: 1em
+  
+.search__result--button
+  max-width: 25%
+  
+.movie
+  display: flex
+  align-items: flex-start
+  flex-flow: row wrap
+
+.movie__content--figure
+  margin: 1em 1em 1em 1em
+  box-shadow: 0px 0px 10px grey
+
+.movie__content--details
+  margin-top: 1em
+  flex: 1
+
+.movie__content--detail-list
+  list-style: none
+
+.movie__content--detail-item
+  display: inline

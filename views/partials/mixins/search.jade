@@ -1,0 +1,10 @@
+mixin movieSearch(...classes)
+  section.container
+    form(action='/api/v1/search',method='get', id='search')&attributes(attributes)
+      h3 Search for a movie
+      fieldset
+        label(for='title') Movie Title
+        input(type='text' id='title' placeholder='Inside out', autocomplete='off')
+        button(class='button-primary' type='submit') Search
+        .search__results
+  script(type='text/javascript' src='/js/search.js')

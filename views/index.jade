@@ -1,0 +1,14 @@
+extends ./layout.jade
+
+block content
+  section
+    header.banner 
+      h1
+        i.fa.fa-ticket
+      h1 Welcome to 
+        span.color--prime Watch List
+  section.container
+    h3 A brief disclaimer
+    p This site is very much a work in progress, so please be patient.
+  +movieSearch()
+  

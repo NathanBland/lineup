@@ -1,0 +1,41 @@
+{
+  "name": "lineup",
+  "version": "0.0.1",
+  "description": "An application to organize lists of movies by interest level between groups.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanBland/lineup.git"
+  },
+  "keywords": [
+    "movies",
+    "list",
+    "groups",
+    "friends",
+    "collaboration",
+    "lineup"
+  ],
+  "author": "Nathan Bland",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NathanBland/lineup/issues"
+  },
+  "homepage": "https://github.com/NathanBland/lineup#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "connect-mongo": "^1.1.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "jade": "^1.11.0",
+    "milligram": "^1.1.0",
+    "mongoose": "^4.4.2",
+    "node-sass-middleware": "^0.9.7",
+    "omdb-client": "^1.0.6",
+    "passport": "^0.3.2",
+    "whatwg-fetch": "^0.11.0"
+  }
+}

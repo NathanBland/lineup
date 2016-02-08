@@ -1,0 +1,36 @@
+extends ./layout.jade
+block pagetitle
+  title #{movie.Title} | #{title}
+
+block content
+  section.container.movie
+    img.movie__content--figure(src='#{movie.Poster}', alt='#{movie.Title}')
+    section.movie__content--details
+      h1.movie__content--title #{movie.Title} (#{movie.Year})
+      ul.movie__content--detail-list
+        li.movie__content--detail-item 
+          strong Rating: 
+          | #{movie.Rated} 
+        li.movie__content--detail-item 
+          strong Released: 
+          | #{movie.Released}
+        li.movie__content--detail-item 
+          strong Genre: 
+          | #{movie.Genre}
+      p.movie__content--plot #{movie.Plot}
+      h5 Other Information
+      ul.movie__content--detail-list 
+        li 
+          strong Actors: 
+          | #{movie.Actors}
+        li 
+          strong Director: 
+          | #{movie.Director}
+        li 
+          strong Metascore: 
+          | #{movie.Metascore}
+        li 
+          strong Imdb Rating: 
+          | #{movie.imdbRating}
+          
+  +movieSearch()(class='search')

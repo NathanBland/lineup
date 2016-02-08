@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    block pagetitle
+      title #{title}
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic")
+    link(rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
+    link(rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css")
+    link(rel="stylesheet" type="text/css" href="/css/vendor/milligram.min.css")
+    link(rel="stylesheet" type="text/css" href="/css/vendor/animate.min.css")
+    link(rel="stylesheet" type="text/css" href="/css/style.css")
+    script(type='text/javascript' src='/js/vendor/fetch.js')
+  body
+    include ./partials/mixins/search
+    main.wrapper
+      nav.navigation
+        section.container.nav
+          a.navigation-title(href='/')
+            h1.title  
+              i.fa.fa-ticket  #{siteName}
+          ul.navigation-list
+            li.navigation-item
+              a.navigation-link(href='/login', data-popover='') Login
+            li.navigation-item
+              a.navigation-link(href='/signUp', data-popover='') Sign Up
+      block content
+      
