@@ -1,0 +1,17 @@
+extends ./layout.jade
+block pagetitle
+  title #{title}
+
+block content
+  section.container
+    header.banner 
+      h1
+        i.fa.fa-ticket
+      h1 
+        span.color--prime Uh oh. 
+      h3 Page Not Found - 404!
+      p I'm really sorry, I tried my best but I couldn't find that page.
+      p All isn't lost though, you can go back to 
+        a(href='/lists') safety
+        | or search for a movie below.
+  +movieSearch()

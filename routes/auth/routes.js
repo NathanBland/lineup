@@ -18,11 +18,9 @@ router.get('/login/twitter', passport.authenticate('twitter'))
 router.get('/login/twitter/return',
   passport.authenticate('twitter', { 
     successRedirect: '/',
-    failureRedirect: '/login' }))
-  /*passport.authenticate('twitter', {
-    successRedirect: '/test',
-    failureRedirect: '/login'
-  })*/
+    failureRedirect: '/login' 
+  })
+)
 /**
  * 
  * End Twitter
@@ -37,12 +35,12 @@ router.get('/login/twitter/return',
 router.get('/login/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }))
-router.get('/login/google/return', function(req, res, next) {
+router.get('/login/google/return', 
   passport.authenticate('google', {
-    successRedirect: '/test2',
+    successRedirect: '/',
     failureRedirect: '/login'
   })
-})
+)
 
 router.get('/logout', function(req, res) {
   req.logout()

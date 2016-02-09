@@ -4,21 +4,17 @@ var mongoose = require('mongoose')
 var User = require('../../models/User.js')
 var router = module.exports = express.Router()
 
-var twitterStrategy = require('passport-twitter-token').Strategy
-
 router.use(passport.initialize())
 router.use(passport.session())
 
 passport.use('twitter', require('./twitter'))
-// router.use('/google', require('./google'))
+passport.use('google', require('./google'))
 
 passport.serializeUser(function(user, cb) {
-  console.log('[auth.js] serialize user:', user)
   cb(null, user.id)
 })
 
 passport.deserializeUser(function(id, cb) {
-  console.log('[auth.js] deserialize user:', id)
   User.findById(id, function(err, user) {
     if (err) {
         console.log('uh oh error:', err)
@@ -26,12 +22,16 @@ passport.deserializeUser(function(id, cb) {
     cb(null, user)
   })
 })
-
-router.get('/login', function (req, res, next) {
-  return res.render('login', {
-    title: 'Sign On | Watch List'
-  })
+router.use(function (req, res, next) {
+  var user = req.user
+  if (user) {
+    if (user.twitter) {
+      res.locals.user = user.twitter
+    }
+  }
+  next()
 })
+
 router.use(require('./routes'))
 
 /*router.get('/', function(req, res, next) {

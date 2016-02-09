@@ -21,11 +21,12 @@ router.get('/', function (req, res, next) {
       omdb.search(params, function (err, data) {
         if (err) {
           return handleError(res, err)
+        } else {
+          console.log('[search.js](/title='
+          + req.query.title
+          + ') got back', data)
+          return res.status(200).json(data)
         }
-        console.log('[search.js](/title='
-        + req.query.title
-        + ') got back', data)
-        return res.status(200).json(data)
       })
     }
 })

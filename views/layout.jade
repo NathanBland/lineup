@@ -15,15 +15,6 @@ html(lang='en')
   body
     include ./partials/mixins/search
     main.wrapper
-      nav.navigation
-        section.container.nav
-          a.navigation-title(href='/')
-            h1.title  
-              i.fa.fa-ticket  #{siteName}
-          ul.navigation-list
-            li.navigation-item
-              a.navigation-link(href='/login', data-popover='') Login
-            li.navigation-item
-              a.navigation-link(href='/signUp', data-popover='') Sign Up
+      include ./partials/navigation
       block content
       

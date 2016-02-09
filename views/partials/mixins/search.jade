@@ -1,6 +1,6 @@
 mixin movieSearch(...classes)
   section.container
-    form(action='/api/v1/search',method='get', id='search')&attributes(attributes)
+    form(action='/search',method='get', id='search')&attributes(attributes)
       h3 Search for a movie
       fieldset
         label(for='title') Movie Title
@@ -8,3 +8,14 @@ mixin movieSearch(...classes)
         button(class='button-primary' type='submit') Search
         .search__results
   script(type='text/javascript' src='/js/search.js')
+  
+mixin addList(...classes)
+  section.container
+    form.add__list(action='/lists/add', method='post', id='addList')&attributes(attributes)
+      h3 Make a List
+      fieldset
+        label(for='title') List Title
+        input(type='text' id='listTitle' placeholder='Weekenders', autocomplete='off')
+        button(class='button-primary' type='submit') Create
+        .search__results
+  

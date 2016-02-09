@@ -1,0 +1,18 @@
+nav.navigation
+  section.container.nav
+    a.navigation-title(href='/')
+      h1.title  
+        i.fa.fa-ticket  #{siteName}
+        
+    ul.navigation-list
+      if user
+        li.navigation-item Welcome, #{user.name || user.displayName}
+        li.navigation-item
+          a.navigation-link(href='/lists') My Lists
+        li.navigation-item
+          a.navigation-link(href='/logout') Sign Out
+      else
+        li.navigation-item
+          a.navigation-link(href='/login', data-popover='') Login
+        li.navigation-item
+          a.navigation-link(href='/login', data-popover='') Sign Up

@@ -1,0 +1,16 @@
+extends ./layout.jade
+block pagetitle
+  title #{title}
+
+block content
+  section.container.lists
+    h1 My Lists
+    if lists.length > 0
+      ul.movie__lists
+      each list in lists
+        li.movie__list list.title
+    else
+      p Looks like you don't have any lists, why not make one?
+      +addList
+          
+  +movieSearch()(class='search')

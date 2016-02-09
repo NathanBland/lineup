@@ -1,5 +1,3 @@
-var express = require('express')
-var passport = require('passport')
 var twitterStrategy = require('passport-twitter').Strategy
 var User = require('../../models/User.js')
 
