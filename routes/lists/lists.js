@@ -66,6 +66,7 @@ router.get('/:alias', function (req, res, next) {
         if (err) {
           next(err)
         }
+        console.log('results of getMovies:', movies)
         return res.render('movieList', {
           title: list.title+' | Watch List',
           list: list,

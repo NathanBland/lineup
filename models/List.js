@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Movie = require('./Movie')
+var ObjectId = mongoose.Schema.Types.ObjectId
 var omdb = require('omdb-client')
 var userRef = mongoose.Schema({
   user_id: {
@@ -15,10 +16,39 @@ var List = mongoose.Schema({
   })
 
 List.methods.getMovies = function (cb) {
-  return Movie.find({
-    list_id: this._id
-  }, cb)
-  // .sort(''), cb)
+  var list_id = this._id
+  return Movie.aggregate({
+    $match: {
+      list_id: new ObjectId(list_id)
+    }},
+    {
+      $project: {
+        info: 1,
+        imdbID: 1,
+        watched: 1,
+        votes: {
+          $cond: {
+            if: {$eq: ['$votes', []]},
+            then: [null],
+            else: '$votes'
+          }
+        }
+      }
+    },
+    {
+      $unwind: {
+        path: "$votes",
+        preserveNullAndEmptyArrays: true
+      }   
+    },
+    {
+      $group: {
+        _id: "$_id",
+        votes: {
+          $sum: "$votes.vote"
+        }
+      }
+    }, cb)
 }
 
 List.methods.getMovieById = function (id, cb) {
