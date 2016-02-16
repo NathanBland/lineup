@@ -3,14 +3,15 @@ block pagetitle
   title #{title}
 
 block content
-  section.container.lists
+  section.container.lists.margin__extra--bottom
     h1 My Lists
     if lists.length > 0
       ul.movie__lists
       each list in lists
-        li.movie__list list.title
+        li.movie__list
+          a(href='/lists/#{list.alias}')= list.title
     else
       p Looks like you don't have any lists, why not make one?
-      +addList
+    +addList()(class='no__margin--left')
           
-  +movieSearch()(class='search')
+  +movieSearch()

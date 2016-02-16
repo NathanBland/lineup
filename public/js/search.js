@@ -1,4 +1,5 @@
 var form = document.querySelector('#search')
+var currentListId = document.querySelector('#listAliasInput')
 
 function populateResults (data) {
   var container = document.querySelector('.search__results')
@@ -8,21 +9,36 @@ function populateResults (data) {
     var resultObject = document.createElement('div')
     resultObject.classList.add('search__result')
     
-    var posterImg = document.createElement('img')
+    if (ele.Poster === 'N/A'){
+      var posterImg = document.createElement('i')
+      posterImg.classList.add('fa')
+      posterImg.classList.add('fa-film')
+    } else {
+      var posterImg = document.createElement('img')
+      posterImg.setAttribute('src', ele.Poster)
+    }
     posterImg.classList.add('search__result--figure')
-    posterImg.setAttribute('src', ele.Poster)
     
     var searchDetails = document.createElement('div')
     searchDetails.classList.add('search__result--details')
-    
     var titleText = document.createElement('h4')
     titleText.classList.add('search__result--text')
     titleText.textContent = ele.Title + ' (' + ele.Year + ')'
     
-    var link = document.createElement('a')
-    link.setAttribute('href', '/movie/'+ele.imdbID)
     
     searchDetails.appendChild(titleText)
+    if (currentListId) {
+      var addToList = document.createElement('a')
+      addToList.setAttribute('href', '/lists/'
+        + currentListId.value
+        + '/add/'+ele.imdbID)
+      addToList.textContent = 'Add To Current List'
+      
+      searchDetails.appendChild(addToList)
+    }
+    
+    var link = document.createElement('a')
+    link.setAttribute('href', '/movie/'+ele.imdbID)
     
     resultObject.appendChild(posterImg)
     resultObject.appendChild(searchDetails)

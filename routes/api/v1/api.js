@@ -4,6 +4,7 @@ var router = module.exports = express.Router()
 
 router.use('/search', require('./search'))
 router.use('/movie', require('./movie'))
+router.use('/users', require('./users'))
 
 router.get('/', function(req, res, next) {
     return res.status(200).json({

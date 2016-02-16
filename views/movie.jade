@@ -17,7 +17,8 @@ block content
         li.movie__content--detail-item 
           strong Genre: 
           | #{movie.Genre}
-      p.movie__content--plot #{movie.Plot}
+      blockquote.movie__content--plot
+        em #{movie.Plot}
       h5 Other Information
       ul.movie__content--detail-list 
         li 

@@ -1,21 +1,33 @@
-mixin movieSearch(...classes)
+mixin movieSearch(list,...classes)
   section.container
     form(action='/search',method='get', id='search')&attributes(attributes)
       h3 Search for a movie
       fieldset
         label(for='title') Movie Title
+        if list
+          input(type='hidden', value=list, name='listAlias' id='listAliasInput')
         input(type='text' id='title' placeholder='Inside out', autocomplete='off')
         button(class='button-primary' type='submit') Search
         .search__results
   script(type='text/javascript' src='/js/search.js')
   
 mixin addList(...classes)
-  section.container
+  section
     form.add__list(action='/lists/add', method='post', id='addList')&attributes(attributes)
       h3 Make a List
       fieldset
         label(for='title') List Title
-        input(type='text' id='listTitle' placeholder='Weekenders', autocomplete='off')
+        input(type='text', name='listTitle' id='listTitle' placeholder='Weekenders', autocomplete='off')
         button(class='button-primary' type='submit') Create
-        .search__results
-  
+
+mixin userSearch(list,...classes)
+  form(action='/user/search',method='get', id='userSearch')&attributes(attributes)
+    h4 Search for a user to add
+    fieldset
+      label(for='userInput') User
+      if list
+        input(type='hidden', value=list, name='listAlias')
+      input(type='text', name='userInput' id='userInput' placeholder='@JoeSmith', autocomplete='off')
+      button(class='button-primary' type='submit') Search
+      .user__search__results
+  script(type='text/javascript' src='/js/userSearch.js')

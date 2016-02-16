@@ -4,6 +4,11 @@ var ensureAuthenticated = ensureLogin.ensureAuthenticated
 
 var router = module.exports = express.Router()
 
+router.use(function(req, res, next) {
+    console.log('requesting:',  req.originalUrl)
+    next()
+})
+
 router.use(require('./auth/auth'))
 router.use('/api/v1', require('./api/v1/api'))
 router.use('/movie', require('./movie/movie'))

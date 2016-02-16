@@ -1,0 +1,49 @@
+extends ./layout.jade
+block pagetitle
+  title #{title}
+
+block content
+  section.container.lists.margin__extra--bottom
+    header
+      section.header__options
+        h1= list.title
+        span.list__options
+          button.button-clear.fa.fa-caret-down.list__options--button
+          ul.list__options
+            li.list__option
+              h5
+                form(method='post',action='/lists/#{list.alias}/remove')
+                  button.button-clear(type='submit') 
+                    i.fa.fa-trash  Delete
+      if list.users.length > 0
+        section.user__list
+          each usr in list.users
+            span.button.button-outline
+              i.fa.fa-user
+              if (usr.user_id.twitter.displayName)
+                |  #{usr.user_id.twitter.displayName}
+              else
+                |  #{usr.user_id.google.name}
+    section.users
+      +userSearch(list.alias)(class='small')
+    if movies.length > 0
+      section.movie__list
+        each movie in movies
+            .media__object.card 
+              .media__object--header.center
+                h5= movie.info.Title
+              .media__object--figure.thumb
+                a(href='/movie/#{movie.info.imdbID}', title='#{movie.info.Title}')
+                  img(src='#{movie.info.Poster}' alt='#{movie.info.Title}')
+              .media__object--body
+                .media__object--content.actions 
+                  button.button.vote.vote--down
+                    i.fa.fa-thumbs-down
+                  button.button.vote Maybe
+                  button.button.vote.vote--up
+                    i.fa.fa-thumbs-up
+    else
+      p Looks like you don't have any movies on this list, why not add one?
+      
+          
+  +movieSearch(list.alias)

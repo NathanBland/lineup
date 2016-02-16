@@ -25,8 +25,10 @@ passport.deserializeUser(function(id, cb) {
 router.use(function (req, res, next) {
   var user = req.user
   if (user) {
-    if (user.twitter) {
+    if (user.twitter.id) {
       res.locals.user = user.twitter
+    } else {
+      res.locals.user = user.google
     }
   }
   next()

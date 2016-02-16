@@ -3,7 +3,15 @@ block pagetitle
   title #{title}
   
 block content
-  section.container
-    section.container
-    h1 Uh oh. 
-    h3= notification.message
+  section
+    header.banner 
+      h1
+        i.fa.fa-ticket
+      h1 
+        span.color--prime Uh oh. 
+      h3= notification.message
+      p Something is really wrong on our side.
+      p All isn't lost though, you can go back to 
+        a(href='/lists') safety 
+        | or search for a movie below.
+  +movieSearch()

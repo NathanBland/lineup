@@ -3,7 +3,7 @@ block pagetitle
   title #{title}
 
 block content
-  section.container
+  section
     header.banner 
       h1
         i.fa.fa-ticket
@@ -12,6 +12,7 @@ block content
       h3 Page Not Found - 404!
       p I'm really sorry, I tried my best but I couldn't find that page.
       p All isn't lost though, you can go back to 
-        a(href='/lists') safety
+        a(href='/lists') safety 
         | or search for a movie below.
+      p
   +movieSearch()
