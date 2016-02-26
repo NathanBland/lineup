@@ -19,35 +19,46 @@ List.methods.getMovies = function (cb) {
   var list_id = this._id
   return Movie.aggregate({
     $match: {
-      list_id: new ObjectId(list_id)
+      list_id: list_id
     }},
     {
       $project: {
         info: 1,
         imdbID: 1,
         watched: 1,
+        /*votes: {
+          $ifNull: ["$votes", [{vote: 0}]]
+        }*/
         votes: {
-          $cond: {
-            if: {$eq: ['$votes', []]},
-            then: [null],
-            else: '$votes'
-          }
+          $cond: [{$eq: ["$votes", [] ] },
+          [{ vote: 0.5}],
+          '$votes']
         }
       }
     },
     {
-      $unwind: {
-        path: "$votes",
-        preserveNullAndEmptyArrays: true
-      }   
+      $unwind: '$votes'
     },
     {
       $group: {
-        _id: "$_id",
-        votes: {
-          $sum: "$votes.vote"
+      _id:"$_id",
+      votes:{ $sum: "$votes.vote"},
+      vote_count:{ 
+        $sum: {
+          $cond: [{
+            $eq: [ "$votes", 0.5]},
+            0,
+            1
+          ]
         }
+      },
+      info: {$first:"$info"},
+      imdbID:{$first: "$imdbID"},
+      watched: {$first:"$watched"}
       }
+    },
+    {
+     $sort: { votes: -1 } 
     }, cb)
 }
 
@@ -67,12 +78,27 @@ List.methods.addMovie = function (imdbID, cb) {
     if (err) {
       throw err
     }
-    Movie.findOrCreate({
+    return Movie.findOrCreate({
       list_id: listId,
       imdbID: imdbID,
       info: data
     }, cb)
   })
+}
+List.methods.movieVote = function(vote, imdbID, user_id, cb) {
+  // var usr = new ObjectId(user_id)
+  console.log('values to make things with:', vote, imdbID, user_id)
+  return Movie.findOneAndUpdate({
+    list_id: this._id,
+    imdbID: imdbID
+  }, {
+    $addToSet : {
+      "votes": {
+        vote: vote,
+        user_id: user_id
+      }
+    }
+  },cb)
 }
 
 List.methods.removeMovie = function (movie, cb) {

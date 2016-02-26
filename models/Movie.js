@@ -1,8 +1,9 @@
 var mongoose = require('mongoose')
 var findOrCreate = require('mongoose-findorcreate')
 var Vote = mongoose.Schema({
+    _id: false,
     user_id: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: 'user'
     },
     vote: Number

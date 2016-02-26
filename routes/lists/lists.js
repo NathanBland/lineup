@@ -37,7 +37,7 @@ router.route('/add')
       title: req.body.listTitle,
       alias: req.body.listTitle.replace(/\s+/g, '') + new Date().toISOString(),
     })
-    list.owner = req.user._id
+    list.owner = {user_id: req.user._id}
     list.users.push({
       user_id: req.user._id
     })
@@ -124,16 +124,27 @@ router.route('/:alias/remove')
     })
   })
 
-router.route('/:alias/movie/:movieId/vote')
+router.route('/:alias/movie/:movieId/:vote')
   .post(function(req, res, next) {
-      if (!req.params.alias || !!req.params.movie) {
+      if (!req.params.alias || !req.params.movieId || !req.params.vote) {
+        console.log('[lists.js](/:alias/movie/:movieId/:vote) Error!')
+        console.log('submitted params:', req.params)
         return next('invalid')
       }
+      console.log('voting...')
       Lists.findOne({'users.user_id': req.user._id, alias: req.params.alias})
       .exec(function(err, list) {
+        if (err) {
+          return next(err)
+        }
+        list.movieVote(req.params.vote, req.params.movieId, req.user._id,
+        function (err, result) {
           if (err) {
-            next(err)
+            return next(err)
           }
+          console.log('result from voting:', result)
+          return res.redirect('/lists/'+req.params.alias)
+        })
       })
   })
   

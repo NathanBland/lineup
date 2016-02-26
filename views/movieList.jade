@@ -36,12 +36,25 @@ block content
                 a(href='/movie/#{movie.info.imdbID}', title='#{movie.info.Title}')
                   img(src='#{movie.info.Poster}' alt='#{movie.info.Title}')
               .media__object--body
+                span.interest__level--total
+                  if (movie.votes !== 0.5)
+                    span.interest__level(style='width: #{movie.votes*100/list.users.length}%')
+                  else
+                    span.interest__level.interest__level--empty
+                span.vote__count
+                  if (movie.votes !== 0.5)
+                    | Votes: #{movie.vote_count}
+                  else
+                    | Votes: 0
                 .media__object--content.actions 
-                  button.button.vote.vote--down
-                    i.fa.fa-thumbs-down
-                  button.button.vote Maybe
-                  button.button.vote.vote--up
-                    i.fa.fa-thumbs-up
+                  form(method='post', action='/lists/#{list.alias}/movie/#{movie.info.imdbID}/-1')
+                    button.button.vote.vote--down(type='submit')
+                      i.fa.fa-thumbs-down
+                  form(method='post', action='/lists/#{list.alias}/movie/#{movie.info.imdbID}/0')
+                    button.button.vote(type='submit') Maybe
+                  form(method='post', action='/lists/#{list.alias}/movie/#{movie.info.imdbID}/1')
+                    button.button.vote.vote--up(type='submit')
+                      i.fa.fa-thumbs-up
     else
       p Looks like you don't have any movies on this list, why not add one?
       

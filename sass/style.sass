@@ -58,9 +58,13 @@ $primary-up: #4DCA57
     flex-direction: column
     flex-wrap: nowrap
     margin-top: 1em
+    .media__object--body
+      flex: 0
+    .media__object--header
+      flex: 1
     
 .media__object--figure
-  margin: 1 
+  margin: .1rem 
   margin-left: auto
   margin-right: auto
   img
@@ -81,7 +85,16 @@ $primary-up: #4DCA57
     align-self: center
     max-width: 15em
     text-align: center
-.media__object--content
+    min-width: 13em
+    display: flex
+    justify-content: center
+    align-items: center
+    
+.media__object--content.actions
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  flex-flow: row wrap
 
 #search fieldset, #userSearch fieldset
   position: relative
@@ -139,7 +152,7 @@ i.fa.fa-film.search__result--figure
   flex-flow: row wrap
 
 .movie__content--figure
-  margin: 1em 1em 1em 1em
+  margin: 1em 2em 1em 1em
   box-shadow: 0px 0px 10px grey
 
 .movie__content--details
@@ -228,6 +241,26 @@ ul.list__options
     border: .1rem solid $primary-up
     &:hover
       background-color: rgb(62, 162, 70)
+      
+.interest__level
+  height: 1em
+  position: absolute
+  right: 0
+  background-color: $primary-up
+  border-radius: 5px
+.interest__level--total
+  position: relative
+  width: 100%
+  background-color: $primary-down
+  height: 1em
+  margin: .1rem
+  border-radius: 5px
+.interest__level--empty
+  background-color: $primary-color
+  width: 100% 
+  
+.vote__count
+  align-self: center
 .margin__extra--top
   margin-top: 1em
 .margin__extra--bottom
